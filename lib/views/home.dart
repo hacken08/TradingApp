@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -8,9 +9,18 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text("Home Page")),
-      body: const SafeArea(
-          child: Center(
-        child: Text("Home Page"),
+      body: SafeArea(
+          child: Column(
+        children: [
+          const Center(
+            child: Text("Home Page"),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                context.go("/login");
+              },
+              child: const Text("Go to login page")),
+        ],
       )),
     );
   }
