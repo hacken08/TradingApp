@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ReUsableButton extends HookConsumerWidget {
+class ReUsableLoginButton extends HookConsumerWidget {
   final String buttonName;
   final LinearGradient colorGradient;
   final void Function() onTap;
   final IconData icon;
-  const ReUsableButton({
+  const ReUsableLoginButton({
     super.key,
     required this.buttonName,
     required this.colorGradient,
@@ -31,16 +31,22 @@ class ReUsableButton extends HookConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              buttonName,
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 255, 255, 255)),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                buttonName,
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(255, 255, 255, 255)),
+              ),
             ),
-            Icon(
-              icon,
-              color: const Color.fromARGB(255, 255, 255, 255),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Icon(
+                icon,
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
             ),
           ],
         ),
