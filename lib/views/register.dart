@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../components/buttons/button.dart';
+
 class RegisterPage extends HookConsumerWidget {
   const RegisterPage({super.key});
 
@@ -111,22 +113,18 @@ class RegisterPage extends HookConsumerWidget {
                     ],
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      // reUsableButton(
-                      //     "Sign Up",
-                      //     const LinearGradient(
-                      //       colors: [
-                      //         Color.fromARGB(255, 255, 139, 76),
-                      //         Color.fromARGB(255, 251, 118, 47),
-                      //       ],
-                      //       end: Alignment.topLeft,
-                      //       begin: Alignment.topRight,
-                      //     ),
-                      //     () {},
-                      //     Icons.login),
-                    ],
+                  ReUsableButton(
+                    buttonName: "Sign Up",
+                    colorGradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 255, 139, 76),
+                        Color.fromARGB(255, 251, 118, 47),
+                      ],
+                      end: Alignment.topLeft,
+                      begin: Alignment.topRight,
+                    ),
+                    onTap: () {},
+                    icon: Icons.login,
                   ),
 
                   Row(
