@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/routers/router.dart';
 import 'package:trading_app/views/login.dart';
 import 'package:trading_app/views/onBoarding.dart';
+import 'package:trading_app/views/profile.dart';
 import 'package:trading_app/views/register.dart';
 
 Future<void> main() async {
@@ -24,7 +25,7 @@ class Trading extends HookConsumerWidget {
     //   routerConfig: router,
     // );
     return MaterialApp(
-      home: const LoginPage(),
+      home: const SignUpPage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.purple,

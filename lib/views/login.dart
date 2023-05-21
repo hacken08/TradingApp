@@ -125,15 +125,15 @@ class LoginPage extends HookConsumerWidget {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
+                      children: const [
+                        SizedBox(
                           width: 130,
-                          child: const Divider(
+                          child:  Divider(
                             thickness: 0.9,
                             color: Color.fromARGB(255, 227, 227, 227),
                           ),
                         ),
-                        const Padding(
+                         Padding(
                           padding:
                               EdgeInsets.only(bottom: 5, left: 15, right: 15),
                           child: Text(
@@ -147,13 +147,11 @@ class LoginPage extends HookConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 23,
-                            bottom: 20,
+                          padding:  EdgeInsets.only( top: 23, bottom: 20,
                           ),
-                          child: Container(
+                          child: SizedBox(
                             width: 130,
-                            child: const Divider(
+                            child:  Divider(
                               thickness: 0.9,
                               color: Color.fromARGB(255, 227, 227, 227),
                             ),
