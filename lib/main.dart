@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/routers/router.dart';
+import 'package:trading_app/views/login.dart';
+import 'package:trading_app/views/onBoarding.dart';
+import 'package:trading_app/views/register.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,13 +15,20 @@ class Trading extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp.router(
+    // return MaterialApp.router(
+    //   debugShowCheckedModeBanner: false,
+    //   title: "Trading App",
+    //   theme: ThemeData(
+    //     primaryColor: Colors.purple,
+    //   ),
+    //   routerConfig: router,
+    // );
+    return MaterialApp(
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
-      title: "Trading App",
       theme: ThemeData(
         primaryColor: Colors.purple,
       ),
-      routerConfig: router,
     );
   }
 }
