@@ -168,9 +168,9 @@ class RegisterPage extends HookConsumerWidget {
                           child: const Text(
                             "Log In",
                             style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
+                              color: Colors.blue,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
                           ),
                         )
                       ],
