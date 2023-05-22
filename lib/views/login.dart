@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trading_app/routers/route_names.dart';
-import 'package:trading_app/components/TextFormFields.dart';
+import 'package:trading_app/components/textFormFields.dart';
 import 'package:trading_app/components/buttons/button.dart';
 
 class LoginPage extends HookConsumerWidget {
@@ -10,8 +11,8 @@ class LoginPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    var _emailController = TextEditingController();
-    var _passwordController = TextEditingController();
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
 
     return MaterialApp(
       home: SafeArea(
@@ -55,7 +56,7 @@ class LoginPage extends HookConsumerWidget {
                       hintText: "Email ID",
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
-                      textFieldController: _emailController,
+                      textFieldController: emailController,
                       iconButton: const Text(
                         '',
                         style: TextStyle(fontSize: 35),
@@ -70,7 +71,7 @@ class LoginPage extends HookConsumerWidget {
                       hintText: "password",
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
-                      textFieldController: _passwordController,
+                      textFieldController: passwordController,
                       iconButton: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.remove_red_eye_outlined),
@@ -118,22 +119,23 @@ class LoginPage extends HookConsumerWidget {
                         ],
                       )),
 
-                  Padding(
-                    padding: const EdgeInsets.only(
+                   Padding(
+                    padding: EdgeInsets.only(
                       top: 6,
                       bottom: 6,
                     ),
-                    child: Row(
+                    
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         SizedBox(
                           width: 130,
-                          child:  Divider(
+                          child: Divider(
                             thickness: 0.9,
                             color: Color.fromARGB(255, 227, 227, 227),
                           ),
                         ),
-                         Padding(
+                        Padding(
                           padding:
                               EdgeInsets.only(bottom: 5, left: 15, right: 15),
                           child: Text(
@@ -147,11 +149,13 @@ class LoginPage extends HookConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding:  EdgeInsets.only( top: 23, bottom: 20,
+                          padding: EdgeInsets.only(
+                            top: 23,
+                            bottom: 20,
                           ),
                           child: SizedBox(
                             width: 130,
-                            child:  Divider(
+                            child: Divider(
                               thickness: 0.9,
                               color: Color.fromARGB(255, 227, 227, 227),
                             ),
@@ -167,7 +171,7 @@ class LoginPage extends HookConsumerWidget {
                       onTap: () {},
                       child: Ink(
                           width: 360,
-                          height: 50,
+                          height: 50, 
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(13),
                             color: const Color.fromARGB(255, 241, 237, 237),

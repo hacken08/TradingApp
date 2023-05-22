@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/routers/router.dart';
@@ -25,7 +27,7 @@ class Trading extends HookConsumerWidget {
     //   routerConfig: router,
     // );
     return MaterialApp(
-      home: const SignUpPage(),
+      home:  RegisterPage (),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.purple,
