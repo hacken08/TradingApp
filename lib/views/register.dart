@@ -42,7 +42,7 @@ class RegisterPage extends HookConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, right: 20),
                     child: Image.asset(
-                      'assets/images/signUp.png',
+                      'assets/images/signUp.png', scale: 12,
                     ),
                   ),
 
@@ -112,7 +112,8 @@ class RegisterPage extends HookConsumerWidget {
                         icon: const Icon(Icons.remove_red_eye_outlined),
                         splashRadius: 0.1,
                         color: Colors.grey,
-                      )),
+                      )
+                    ),
 
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 30),
@@ -135,7 +136,7 @@ class RegisterPage extends HookConsumerWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 50),
+                    padding: const EdgeInsets.only(top: 30),
                     child: ReUsableLoginButton(
                       buttonName: "Sign Up",
                       colorGradient: const LinearGradient(

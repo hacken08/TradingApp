@@ -57,10 +57,10 @@ class LoginPage extends HookConsumerWidget {
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
                       textFieldController: emailController,
-                      iconButton: const Text(
-                        '',
+                      iconButton: const Text('',
                         style: TextStyle(fontSize: 35),
-                      )),
+                      )
+                    ),
 
                   // -------------------- Password ---------------------
                   ReUsableTextFormFields(
@@ -85,7 +85,7 @@ class LoginPage extends HookConsumerWidget {
                       onPressed: () {},
                       style: const ButtonStyle(
                         splashFactory:
-                            InkSparkle.constantTurbulenceSeedSplashFactory,
+                        InkSparkle.constantTurbulenceSeedSplashFactory,
                       ),
                       child: const Text(
                         "Forget Password ?",
@@ -128,7 +128,7 @@ class LoginPage extends HookConsumerWidget {
                     child:  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        SizedBox(         
                           width: 130,
                           child: Divider(
                             thickness: 0.9,
