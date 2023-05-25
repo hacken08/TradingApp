@@ -42,7 +42,7 @@ class RegisterPage extends HookConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, right: 20),
                     child: Image.asset(
-                      'assets/images/signUp.png', scale: 12,
+                      'assets/images/signUp.png', scale: 2,
                     ),
                   ),
 

@@ -27,7 +27,7 @@ class Trading extends HookConsumerWidget {
     //   routerConfig: router,
     // );
     return MaterialApp(
-      home:  const ProfilePage (),
+      home: const  ProfilePage (),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.purple,

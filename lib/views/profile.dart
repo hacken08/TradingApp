@@ -129,6 +129,8 @@ class ProfilePage extends StatelessWidget {
                                     color: Color.fromARGB(255, 138, 138, 138)),
                               ),
                             ),
+
+
                             Padding(
                               padding: const EdgeInsets.only(left: 40),
                               child: IconButton(
@@ -163,13 +165,12 @@ class ProfilePage extends StatelessWidget {
                           ],
                         ),
                       )
-                    ]),
+                    ],
                   ),
                 ),
+              ),
 
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10,),
 
                 // --------- personal Detail -------
                 Column(
@@ -235,7 +236,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
 
-                    // -------------- Bank Detail -------------
+                    // -------------- Bank Detail --------------
                     Card(
                       elevation: 3,
                       child: Container(
@@ -279,16 +280,16 @@ class ProfilePage extends StatelessWidget {
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 34, right: 25),
+                                  padding: const EdgeInsets.only(
+                                      left: 34, right: 25),
                                   child: Container(
                                       width: 60,
                                       height: 40,
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.blueAccent),
-                                              borderRadius: BorderRadius.circular(10)
-                                              
-                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
                                       child: IconButton(
                                           onPressed: () {},
                                           icon: Icon(
@@ -296,7 +297,9 @@ class ProfilePage extends StatelessWidget {
                                             color: Colors.blue,
                                           ))),
                                 ),
-                                TextButton(onPressed: () {},
+
+                                TextButton(
+                                  onPressed: () {},
                                   child: const Text(
                                     'ADD BANK ACCOUNT',
                                     style: TextStyle(
@@ -304,7 +307,7 @@ class ProfilePage extends StatelessWidget {
                                         color: Colors.blue,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                )
+                                ),
                               ],
                             )
                           ],

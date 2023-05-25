@@ -148,6 +148,7 @@ class LoginPage extends HookConsumerWidget {
                                 color: Color.fromARGB(184, 106, 100, 100)),
                           ),
                         ),
+                        
                         Padding(
                           padding: EdgeInsets.only(
                             top: 23,
