@@ -1,0 +1,375 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../components/buttons/button.dart';
+import '../utils/utilsmethod.dart';
+
+class RegisterPage extends HookConsumerWidget {
+  const RegisterPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var usernameController = useTextEditingController();
+    var emailController = useTextEditingController();
+    var passwordController = useTextEditingController();
+    final size = MediaQuery.of(context).size;
+    final double statusbarHeight = MediaQuery.of(context).padding.top;
+
+    final GlobalKey<FormState> formKey =
+        useMemoized(() => GlobalKey<FormState>());
+    ValueNotifier<bool> showPass = useState<bool>(false);
+
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: size.height - statusbarHeight,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+
+                  Center(
+                    child: Image.asset(
+                      'assets/images/signUp.png',
+                      width: size.width * 0.8,
+                      height: size.width * 0.8,
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35,
+                          fontFamily: 'abel'),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: const Text(
+                      "Create your Demant account",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          fontFamily: 'abel'),
+                    ),
+                  ),
+                  Spacer(),
+                  // -------------username-----------------
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 5,
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == "" || value == null || value.isEmpty) {
+                          return "Enter your email";
+                        }
+                        return null;
+                      },
+                      cursorColor: Colors.black,
+                      cursorWidth: 0.8,
+                      cursorHeight: 25,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.0,
+                      ),
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        icon: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Icon(
+                            Icons.person_outline,
+                            color: Colors.black,
+                          ),
+                        ),
+                        filled: false,
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        disabledBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        label: Text("Username"),
+                        labelStyle: const TextStyle(
+                          height: 0.1,
+                          color: Color.fromARGB(255, 107, 105, 105),
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // ------------------- Email ID -----------------------
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 5,
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == "" || value == null || value.isEmpty) {
+                          return "Enter your email";
+                        } else if (!validateEmail(value)) {
+                          return "Enter a valid email";
+                        }
+                        return null;
+                      },
+                      cursorColor: Colors.black,
+                      cursorWidth: 0.8,
+                      cursorHeight: 25,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.0,
+                      ),
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        icon: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Icon(
+                            Icons.mail_outline,
+                            color: Colors.black,
+                          ),
+                        ),
+                        filled: false,
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        disabledBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        label: Text("Email ID"),
+                        labelStyle: const TextStyle(
+                          height: 0.1,
+                          color: Color.fromARGB(255, 107, 105, 105),
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // ------------------- Password -----------------------
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 5,
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == "" || value == null || value.isEmpty) {
+                          return "Fill the password";
+                        }
+                        return null;
+                      },
+                      cursorColor: Colors.black,
+                      cursorWidth: 0.8,
+                      cursorHeight: 25,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.0,
+                      ),
+                      controller: passwordController,
+                      obscureText: showPass.value,
+                      decoration: InputDecoration(
+                        icon: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Icon(
+                            Icons.lock_outline,
+                            color: Colors.black,
+                          ),
+                        ),
+                        filled: false,
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade700,
+                            width: 0.2,
+                          ),
+                        ),
+                        disabledBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        label: Text("Password"),
+                        suffixIcon: InkWell(
+                          onTap: () => showPass.value = !showPass.value,
+                          child: Icon(
+                            showPass.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility,
+                            color: Colors.black.withOpacity(0.7),
+                          ),
+                        ),
+                        labelStyle: const TextStyle(
+                          height: 0.1,
+                          color: Color.fromARGB(255, 107, 105, 105),
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ReUsableLoginButton(
+                      buttonName: "Sign Up",
+                      colorGradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 255, 139, 76),
+                          Color.fromARGB(255, 251, 118, 47),
+                        ],
+                        end: Alignment.topLeft,
+                        begin: Alignment.topRight,
+                      ),
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          context.go("/home");
+                        }
+                      },
+                      icon: Icons.login,
+                    ),
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Already have account?",
+                        style: TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.go("/login");
+                        },
+                        child: const Text(
+                          "Log In",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "By Signing Up, Your're agree to our",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromARGB(255, 107, 104, 104)),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          "Term & Conditions",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
