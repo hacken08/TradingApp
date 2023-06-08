@@ -52,8 +52,8 @@ class RegisterPage extends HookConsumerWidget {
                   Center(
                     child: Image.asset(
                       'assets/images/signUp.png',
-                      width: size.width * 0.8,
-                      height: size.width * 0.8,
+                      width: size.width * 0.7,
+                      height: size.width * 0.7,
                     ),
                   ),
 
