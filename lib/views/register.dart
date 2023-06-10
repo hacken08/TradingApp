@@ -79,8 +79,8 @@ class RegisterPage extends HookConsumerWidget {
                     ),
                   ),
                   Spacer(),
+                  
                   // -------------username-----------------
-
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,

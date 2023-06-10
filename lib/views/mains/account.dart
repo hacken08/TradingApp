@@ -129,6 +129,7 @@ class AccountPage extends HookConsumerWidget {
                               ),
                               Divider(),
                               SizedBox(height: 20),
+
                               ReusableListView(
                                 icon: Icons.phone_outlined,
                                 label: "Mobile Number",
@@ -137,6 +138,7 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 135,
                                 onTap: () {},
                               ),
+
                               SizedBox(height: 16),
                               ReusableListView(
                                 icon: Icons.mail_outline_outlined,
@@ -146,6 +148,7 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 195,
                                 onTap: () {},
                               ),
+
                               SizedBox(height: 16),
                               ReusableListView(
                                 icon: Icons.pin_drop_outlined,
@@ -155,6 +158,7 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 180,
                                 onTap: () {},
                               ),
+                              
                               SizedBox(height: 16),
                               ReusableListView(
                                 icon: Icons.payment,
