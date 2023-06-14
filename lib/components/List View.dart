@@ -7,11 +7,13 @@ class ReusableListView extends StatelessWidget {
   final String label;
   final String info;
   final double labelPadding;
+  final double leftPadding;
   final double iconPadding;
   final void Function() onTap;
-  const ReusableListView({
+  const  ReusableListView({
     super.key,
     required this.onTap,
+    required this.leftPadding,
     required this.icon,
     required this.label,
     required this.labelPadding,
@@ -24,10 +26,13 @@ class ReusableListView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-              fontSize: 13, color: Color.fromARGB(255, 143, 143, 143)),
+        Padding(
+          padding:  EdgeInsets.only(left: leftPadding),
+          child: Text(
+            label,
+            style: TextStyle(
+                fontSize: 13, color: Color.fromARGB(255, 143, 143, 143)),
+          ),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +43,7 @@ class ReusableListView extends StatelessWidget {
               color: Colors.black,
             ),
             SizedBox(
-              width: 10,
+              width: 30,
             ),
             Text(
               info,

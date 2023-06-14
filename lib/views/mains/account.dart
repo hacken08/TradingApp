@@ -131,6 +131,7 @@ class AccountPage extends HookConsumerWidget {
                               SizedBox(height: 20),
 
                               ReusableListView(
+                                leftPadding: 20,
                                 icon: Icons.phone_outlined,
                                 label: "Mobile Number",
                                 info: "+91 7009524322",
@@ -141,6 +142,7 @@ class AccountPage extends HookConsumerWidget {
 
                               SizedBox(height: 16),
                               ReusableListView(
+                                leftPadding: 20,
                                 icon: Icons.mail_outline_outlined,
                                 label: "Email",
                                 info: "kenkani0408@gmail.com",
@@ -151,6 +153,7 @@ class AccountPage extends HookConsumerWidget {
 
                               SizedBox(height: 16),
                               ReusableListView(
+                                leftPadding: 20,
                                 icon: Icons.pin_drop_outlined,
                                 label: "Address",
                                 info: "Punjab, chandigargh",
@@ -161,6 +164,7 @@ class AccountPage extends HookConsumerWidget {
                               
                               SizedBox(height: 16),
                               ReusableListView(
+                                leftPadding: 20,
                                 icon: Icons.payment,
                                 label: "PAN Number",
                                 info: "ITSPK2773R",
@@ -212,7 +216,7 @@ class AccountPage extends HookConsumerWidget {
                               info: "******3495",
                               onTap: () {},
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 25),
                             Row(
                               children: [
                                 Padding(
@@ -232,7 +236,7 @@ class AccountPage extends HookConsumerWidget {
                                             Icons.add,
                                             color: Colors.blue,
                                           ))),
-                                ),
+                                        ),
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text(
