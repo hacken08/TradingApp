@@ -1,31 +1,70 @@
-import 'dart:ui';
+import 'dart:developer';
 
-const Color whiteColor = Color(0xffffffff);
-const Color blackColor = Color(0xff000000);
+import 'package:flutter/cupertino.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-const Color redColor = Color(0xffef4444);
-const Color roseColor = Color(0xfff43f5e);
-const Color pinkColor = Color(0xffec4899);
+final appTheme = ChangeNotifierProvider.autoDispose<AppTheme>(
+  (ref) => AppTheme(),
+);
 
-const Color indigoColor = Color(0xff6366f1);
-const Color violetColor = Color(0xff8b5cf6);
-const Color purpleColor = Color(0xffa855f7);
-const Color fuchsiaColor = Color(0xffd946ef);
+class AppTheme extends ChangeNotifier {
+  late SharedPreferences prefs;
+  bool isLight = true;
 
-const Color blueColor = Color(0xff3b82f6);
-const Color cyanColor = Color(0xff06b6d4);
-const Color skyColor = Color(0xff0ea5e9);
+  Future<void> init(BuildContext context) async {
+    prefs = await SharedPreferences.getInstance();
 
-const Color greenColor = Color(0xff22c55e);
-const Color emeraldColor = Color(0xff10b981);
-const Color tealColor = Color(0xff14b8a6);
+    final theme = prefs.getString("theme");
+    log(theme.toString());
+  }
 
-const Color orangeColor = Color(0xfff97316);
-const Color yellowColor = Color(0xffeab308);
-const Color anberColor = Color(0xfff59e0b);
+  Future<void> setDarkTheme() async {
+    prefs.setString("theme", "dark");
+    isLight = false;
+    notifyListeners();
+  }
 
-const Color slateColor = Color(0xff64748b);
-const Color grayColor = Color(0xff6b7280);
-const Color zincColor = Color(0xff71717a);
-const Color stoneColor = Color(0xff78716c);
-const Color NeutralColor = Color(0xff737373);
+  Future<void> setLightTheme() async {
+    prefs.setString("theme", "light");
+    isLight = true;
+    notifyListeners();
+  }
+
+  Future<void> setSystemTheme(BuildContext context) async {
+    prefs.setString("theme", "system");
+    var brightness = MediaQuery.of(context).platformBrightness;
+    isLight = brightness == Brightness.light;
+    notifyListeners();
+  }
+}
+
+Color whiteColor = const Color(0xffffffff);
+Color blackColor = const Color(0xff000000);
+
+Color redColor = const Color(0xffef4444);
+Color roseColor = const Color(0xfff43f5e);
+Color pinkColor = const Color(0xffec4899);
+
+Color indigoColor = const Color(0xff6366f1);
+Color violetColor = const Color(0xff8b5cf6);
+Color purpleColor = const Color(0xffa855f7);
+Color fuchsiaColor = const Color(0xffd946ef);
+
+Color blueColor = const Color(0xff3b82f6);
+Color cyanColor = const Color(0xff06b6d4);
+Color skyColor = const Color(0xff0ea5e9);
+
+Color greenColor = const Color(0xff22c55e);
+Color emeraldColor = const Color(0xff10b981);
+Color tealColor = const Color(0xff14b8a6);
+
+Color orangeColor = const Color(0xfff97316);
+Color yellowColor = const Color(0xffeab308);
+Color anberColor = const Color(0xfff59e0b);
+
+Color slateColor = const Color(0xff64748b);
+Color grayColor = const Color(0xff6b7280);
+Color zincColor = const Color(0xff71717a);
+Color stoneColor = const Color(0xff78716c);
+Color neutralColor = const Color(0xff737373);

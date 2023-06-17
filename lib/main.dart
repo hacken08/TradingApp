@@ -1,14 +1,17 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/routers/router.dart';
 
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   runApp(DevicePreview(
+//       enabled: !kReleaseMode,
+//       builder: (context) => const ProviderScope(child: Trading())));
+// }
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const ProviderScope(child: Trading())));
+  runApp(const ProviderScope(child: Trading()));
 }
 
 class Trading extends HookConsumerWidget {
