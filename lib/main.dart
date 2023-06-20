@@ -7,7 +7,7 @@ import 'package:trading_app/routers/router.dart';
 //   runApp(DevicePreview(
 //       enabled: !kReleaseMode,
 //       builder: (context) => const ProviderScope(child: Trading())));
-// }
+// }`
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../states/navigationstate.dart';
 import '../themes/colors.dart';
 import '../utils/enums.dart';
+import 'drawer.dart';
 
 class BoottomNavBar extends HookConsumerWidget {
   final Widget childElement;
@@ -13,12 +14,18 @@ class BoottomNavBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     final navbarStateW = ref.watch(navbarState);
     return Scaffold(
+      key: scaffoldKey,
+      drawer: CustomDrwer(scaffoldkey: scaffoldKey),
       appBar: AppBar(
         backgroundColor: const Color(0xff212037),
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            scaffoldKey.currentState!.openDrawer();
+          },
           child: const Icon(
             Icons.sort,
             size: 30,
@@ -39,7 +46,7 @@ class BoottomNavBar extends HookConsumerWidget {
             icon: const Icon(
               Icons.notifications,
               size: 30,
-              color: whiteColor,
+              color: Colors.white,
             ),
           ),
           IconButton(
@@ -50,7 +57,7 @@ class BoottomNavBar extends HookConsumerWidget {
             icon: const Icon(
               Icons.settings,
               size: 30,
-              color: whiteColor,
+              color: Colors.white,
             ),
           ),
         ],
