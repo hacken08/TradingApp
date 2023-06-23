@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,41 +19,46 @@ class AccountPage extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // -------- Profile ------------
-
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(25),
-                      ),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage('assets/images/smpl.png'),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Container(
+                        width: 400,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
-                        SizedBox(height: 15),
-                        Text(
-                          'Yor Forger',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 22,
-                              letterSpacing: 2),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'CLIENT ID - R6412343',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                              letterSpacing: 2),
-                        ),
-                      ],
-                    ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.only(),
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage:
+                                    AssetImage('assets/images/smpl.png'),
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(
+                              'Yor Forger',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 22,
+                                  letterSpacing: 2),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'CLIENT ID - R6412343',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                  letterSpacing: 2),
+                            ),
+                          ],
+                        )),
                   ),
 
                   SizedBox(height: 10),
@@ -71,11 +76,17 @@ class AccountPage extends HookConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              'Dp ID (DEpository Participant)',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromARGB(255, 138, 138, 138)),
+                            Spacer(),
+                            Image.asset('assets/images/verfiy.png', scale: 7),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Text(
+                                'Dp ID (DEpository Participant)',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromARGB(255, 138, 138, 138)),
+                              ),
                             ),
                             Spacer(),
                             IconButton(
@@ -90,12 +101,21 @@ class AccountPage extends HookConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('1203 3200 3015 2500'),
                             Spacer(),
-                            IconButton(
-                              icon: Icon(Icons.copy),
-                              color: Colors.blue,
-                              onPressed: () {},
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 50, bottom: 30),
+                              child: Text('1203 3200 3015 2500'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                right: 50.0,
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.copy),
+                                color: Colors.blue,
+                                onPressed: () {},
+                              ),
                             )
                           ],
                         )
@@ -129,7 +149,6 @@ class AccountPage extends HookConsumerWidget {
                               ),
                               Divider(),
                               SizedBox(height: 20),
-
                               ReusableListView(
                                 leftPadding: 20,
                                 icon: Icons.phone_outlined,
@@ -139,7 +158,6 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 135,
                                 onTap: () {},
                               ),
-
                               SizedBox(height: 16),
                               ReusableListView(
                                 leftPadding: 20,
@@ -150,7 +168,6 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 195,
                                 onTap: () {},
                               ),
-
                               SizedBox(height: 16),
                               ReusableListView(
                                 leftPadding: 20,
@@ -161,7 +178,6 @@ class AccountPage extends HookConsumerWidget {
                                 labelPadding: 180,
                                 onTap: () {},
                               ),
-                              
                               SizedBox(height: 16),
                               ReusableListView(
                                 leftPadding: 20,
@@ -181,75 +197,78 @@ class AccountPage extends HookConsumerWidget {
                       ),
 
                       // -------------- Bank Detail -------------
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bank Details',
-                              style: TextStyle(
-                                fontSize: 19,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30.0),
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bank Details',
+                                style: TextStyle(
+                                  fontSize: 19,
+                                ),
                               ),
-                            ),
-                            Divider(),
-                            SizedBox(height: 20),
-                            ReusableListViewBank(
-                              image: 'assets/images/bnk_smpl.png',
-                              label: "KOTAK MAHIDRA BANK",
-                              info: "******7095",
-                              onTap: () {},
-                              buttonValue: 1,
-                              imageSize: 35.1,
-                              buttonPadding: 30,
-                            ),
-                            SizedBox(height: 5),
-                            ReusableListViewBank(
-                              buttonValue: 0,
-                              imageSize: 48.1,
-                              buttonPadding: 196,
-                              image: 'assets/images/SBI-logo.svg.png',
-                              label: "SBI",
-                              info: "******3495",
-                              onTap: () {},
-                            ),
-                            SizedBox(height: 25),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 34, right: 25),
-                                  child: Container(
-                                      width: 60,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.blueAccent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.add,
-                                            color: Colors.blue,
-                                          ))),
-                                        ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'ADD BANK ACCOUNT',
+                              Divider(),
+                              SizedBox(height: 20),
+                              ReusableListViewBank(
+                                image: 'assets/images/bnk_smpl.png',
+                                label: "KOTAK MAHIDRA BANK",
+                                info: "******7095",
+                                onTap: () {},
+                                buttonValue: 1,
+                                imageSize: 35.1,
+                                buttonPadding: 30,
+                              ),
+                              SizedBox(height: 18),
+                              ReusableListViewBank(
+                                buttonValue: 0,
+                                imageSize: 48.1,
+                                buttonPadding: 196,
+                                image: 'assets/images/SBI-logo.svg.png',
+                                label: "SBI",
+                                info: "******3495",
+                                onTap: () {},
+                              ),
+                              SizedBox(height: 25),
+                      
+                      
+                            ListTile(
+                                onTap: () => print("Back Account Added"),
+                                leading: Container(
+                                        width: 60,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.blueAccent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: Colors.blue,
+                                            ))),
+                                title: Padding(
+                                  padding: const EdgeInsets.only(left: 13.0),
+                                  child: Text(
+                                    "Add Account",
                                     style: TextStyle(
-                                        fontSize: 17,
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.w400),
+                                      fontSize: 18,
+                                      color: Colors.blue,
+                                      // fontWeight: FontWeight.w500
+                                    ),
                                   ),
-                                )
-                              ],
-                            )
-                          ],
+                                ),
+                                dense: true,
+                                iconColor: Colors.blueGrey,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

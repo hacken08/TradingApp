@@ -10,7 +10,7 @@ class ErrorPage extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xffcf0059),
       body: Center(
-        child: Container(
+        child: Container(                                                                                                                                           
           padding: const EdgeInsets.all(40),
           decoration: BoxDecoration(
             color: const Color(0xffcf0059),

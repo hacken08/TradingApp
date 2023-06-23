@@ -27,7 +27,7 @@ class ReusableListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: leftPadding),
+          padding: EdgeInsets.only(left: 52),
           child: Text(
             label,
             style: TextStyle(
@@ -92,23 +92,29 @@ class ReusableListViewBank extends StatelessWidget {
       children: [
         Row(
           children: [
-            Image.asset(image, scale: imageSize),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Image.asset(image, scale: imageSize),
+            ),
             SizedBox(
               width: 20,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-                Text(
-                  info,
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.only(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  ),
+                  Text(
+                    info,
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  )
+                ],
+              ),
             ),
             Spacer(),
             Radio(
