@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class ReusableListView extends StatelessWidget {
   final double leftPadding;
   final double iconPadding;
   final void Function() onTap;
-  const  ReusableListView({
+  const ReusableListView({
     super.key,
     required this.onTap,
     required this.leftPadding,
@@ -27,7 +27,7 @@ class ReusableListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:  EdgeInsets.only(left: leftPadding),
+          padding: EdgeInsets.only(left: leftPadding),
           child: Text(
             label,
             style: TextStyle(
@@ -122,6 +122,53 @@ class ReusableListViewBank extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class StockList extends StatelessWidget {
+  final String stockName;
+  final String StockPrice;
+  final Color PriceColor;
+
+  const StockList({
+    super.key,
+    required this.stockName,
+    required this.StockPrice,
+    required this.PriceColor,
+    });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListTile(
+            focusColor: Colors.white,
+            hoverColor: Colors.white,
+            splashColor: Colors.white,
+            onTap: () {},
+            title: Text(
+              stockName,
+              style: TextStyle(
+                fontSize: 17,
+                // fontWeight: FontWeight.w500
+              ),
+            ),
+            subtitle: Text(
+              "NSE",
+              style: TextStyle(fontSize: 13),
+            ),
+            dense: true,
+            iconColor: Colors.blueGrey,
+            trailing: Text(
+              StockPrice,
+              style: TextStyle(color: PriceColor),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

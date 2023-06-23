@@ -17,7 +17,7 @@ import '../views/onBoarding.dart';
 import '../views/register.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: "/onboard",
+  initialLocation: "/home",
   errorBuilder: (context, state) => const ErrorPage(),
   routes: [
     ShellRoute(

@@ -17,7 +17,7 @@ class SettingPage extends HookConsumerWidget {
           children: [
             // Container Desig..........
             Card(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              margin: EdgeInsets.symmetric(horizontal: 3, vertical: 15),
               shadowColor: Colors.black,
               elevation: 4,
               child: Container(
@@ -33,9 +33,12 @@ class SettingPage extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Security Settings",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w500)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 26),
+                        child: Text("Security Settings",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w500)),
+                      ),
 
                       // 1. Change PIN...........
                       Padding(
@@ -88,7 +91,6 @@ class SettingPage extends HookConsumerWidget {
                   )),
             ),
 
-            SizedBox(height: 6),
 
             // ------------------- User Preference -----------------
             Card(
