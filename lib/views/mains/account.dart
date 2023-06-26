@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trading_app/components/List%20View.dart';
+
+import '../../components/listview.dart';
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});
@@ -247,24 +248,22 @@ class AccountPage extends HookConsumerWidget {
                                 onTap: () {},
                               ),
                               SizedBox(height: 25),
-                      
-                      
-                            ListTile(
+                              ListTile(
                                 onTap: () => print("Back Account Added"),
                                 leading: Container(
-                                        width: 60,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.add,
-                                              color: Colors.blue,
-                                            ))),
+                                    width: 60,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: Colors.blue,
+                                        ))),
                                 title: Padding(
                                   padding: const EdgeInsets.only(left: 13.0),
                                   child: Text(

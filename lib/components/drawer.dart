@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomDrwer extends HookConsumerWidget {
@@ -166,14 +167,19 @@ class CustomDrwer extends HookConsumerWidget {
               ),
             ),
             const Spacer(),
-            const ListTile(
-              leading: Icon(Icons.logout),
-              title: Text(
-                "Logout",
-                textScaleFactor: 1,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+            InkWell(
+              onTap: () {
+                context.go("/login");
+              },
+              child: const ListTile(
+                leading: Icon(Icons.logout),
+                title: Text(
+                  "Logout",
+                  textScaleFactor: 1,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
