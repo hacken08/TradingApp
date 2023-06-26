@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../components/buttons/button.dart';
+import '../services/api.dart';
 import '../utils/utilsmethod.dart';
 
 class RegisterPage extends HookConsumerWidget {
@@ -79,7 +80,7 @@ class RegisterPage extends HookConsumerWidget {
                     ),
                   ),
                   Spacer(),
-                  
+
                   // -------------username-----------------
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -310,9 +311,38 @@ class RegisterPage extends HookConsumerWidget {
                         end: Alignment.topLeft,
                         begin: Alignment.topRight,
                       ),
-                      onTap: () {
+                      onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          context.go("/home");
+                          final data = await apiCall(
+                              query:
+                                  "mutation signup(\$signUpUserInput:SignUpUserInput!){signup (signUpUserInput:\$signUpUserInput){ id, token, role, email}} ",
+                              variables: {
+                                "signUpUserInput": {
+                                  "name": usernameController.text,
+                                  "email": emailController.text,
+                                  "password": passwordController.text,
+                                }
+                              },
+                              headers: {
+                                "content-type": "*/*"
+                              });
+
+                          if (data.status) {
+                            context.go("/home");
+                          } else {
+                            var snackBar = SnackBar(
+                              content: Text(
+                                data.message,
+                                textScaleFactor: 1,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              backgroundColor: Colors.redAccent,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
                         }
                       },
                       icon: Icons.login,
@@ -329,7 +359,7 @@ class RegisterPage extends HookConsumerWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           context.go("/login");
                         },
                         child: const Text(

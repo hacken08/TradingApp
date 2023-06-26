@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trading_app/components/List%20View.dart';
+
+import '../../components/listview.dart';
 
 class WishListPage extends HookConsumerWidget {
   const WishListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
 
@@ -78,8 +78,7 @@ class WishListPage extends HookConsumerWidget {
                                 "18755.45",
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color:
-                                      const Color.fromARGB(255, 9, 121, 105),
+                                  color: const Color.fromARGB(255, 9, 121, 105),
                                 ),
                               ),
                               Icon(
@@ -126,8 +125,7 @@ class WishListPage extends HookConsumerWidget {
                                 "43633.75",
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color:
-                                      const Color.fromARGB(255, 9, 121, 105),
+                                  color: const Color.fromARGB(255, 9, 121, 105),
                                 ),
                               ),
                               Icon(
@@ -152,60 +150,59 @@ class WishListPage extends HookConsumerWidget {
           ),
 
           // -------------- StockList-------------
-       SizedBox(
-        height: 418, 
-        child:   SingleChildScrollView(
-          child: Column(
-            children: [
-              StockList(
-            stockName: "COALINDIA", 
-            StockPrice: "123.85\n+0.25(-0.11%)",
-            PriceColor: Colors.green,
-            ),
-             StockList(
-            stockName: "IOC", 
-            StockPrice: "432.85\n-0.25(+0.41%)",
-            PriceColor: Colors.red,
-            ),
-             StockList(
-            stockName: "ONGC", 
-            StockPrice: "145.85\n-0.45(+1.231%)",
-            PriceColor: Colors.red,
-            ),StockList(
-          stockName: "COALINDIA", 
-          StockPrice: "123.85\n+0.25(-0.11%)",
-          PriceColor: Colors.green,
-          ),
-           StockList(
-          stockName: "IOC", 
-          StockPrice: "432.85\n-0.25(+0.41%)",
-          PriceColor: Colors.red,
-          ),
-           StockList(
-          stockName: "ONGC", 
-          StockPrice: "145.85\n-0.45(+1.231%)",
-          PriceColor: Colors.red,
-          ),
-           StockList(
-          stockName: "ITC", 
-          StockPrice: "600.85\n-0.223(+0.11%)",
-          PriceColor: Colors.red,
-          ),
-           StockList(
-          stockName: "WIPRO", 
-          StockPrice: "623.45\n+0.35(-0.11%)",
-          PriceColor: Colors.green,
-          ),
-           StockList(
-          stockName: "ICICBANK", 
-          StockPrice: "123.85\n+0.25(-0.11%)",
-          PriceColor: Colors.green,
-          ),
-            ],
-          ),
-        )
-       )
-          
+          SizedBox(
+              height: 418,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StockList(
+                      stockName: "COALINDIA",
+                      StockPrice: "123.85\n+0.25(-0.11%)",
+                      PriceColor: Colors.green,
+                    ),
+                    StockList(
+                      stockName: "IOC",
+                      StockPrice: "432.85\n-0.25(+0.41%)",
+                      PriceColor: Colors.red,
+                    ),
+                    StockList(
+                      stockName: "ONGC",
+                      StockPrice: "145.85\n-0.45(+1.231%)",
+                      PriceColor: Colors.red,
+                    ),
+                    StockList(
+                      stockName: "COALINDIA",
+                      StockPrice: "123.85\n+0.25(-0.11%)",
+                      PriceColor: Colors.green,
+                    ),
+                    StockList(
+                      stockName: "IOC",
+                      StockPrice: "432.85\n-0.25(+0.41%)",
+                      PriceColor: Colors.red,
+                    ),
+                    StockList(
+                      stockName: "ONGC",
+                      StockPrice: "145.85\n-0.45(+1.231%)",
+                      PriceColor: Colors.red,
+                    ),
+                    StockList(
+                      stockName: "ITC",
+                      StockPrice: "600.85\n-0.223(+0.11%)",
+                      PriceColor: Colors.red,
+                    ),
+                    StockList(
+                      stockName: "WIPRO",
+                      StockPrice: "623.45\n+0.35(-0.11%)",
+                      PriceColor: Colors.green,
+                    ),
+                    StockList(
+                      stockName: "ICICBANK",
+                      StockPrice: "123.85\n+0.25(-0.11%)",
+                      PriceColor: Colors.green,
+                    ),
+                  ],
+                ),
+              ))
         ],
       ),
     );

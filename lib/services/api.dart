@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -21,9 +23,16 @@ Future<ApiResponse> apiCall({
   Map<String, String>? headers,
 }) async {
   try {
+    log(jsonEncode({
+      'query': query,
+      'variables': variables,
+    }));
     final response = await http.post(
       Uri.parse(baseUrl),
-      headers: headers,
+      headers: {
+        'Content-Type': 'application/json', // Set the Content-Type header
+        // ...headers ?? {}, // Include additional headers if provided
+      },
       body: jsonEncode({
         'query': query,
         'variables': variables,
@@ -31,10 +40,14 @@ Future<ApiResponse> apiCall({
     );
 
     final responseData = jsonDecode(response.body);
+    log(variables.toString());
 
     if (responseData['data'] == null || responseData['data'] == '') {
+      log("one");
+      log(responseData.toString());
       if (responseData['errors'][0]['originalError'] == "" ||
           responseData['errors'][0]['originalError'] == null) {
+        log("two");
         return ApiResponse(
           status: false,
           data: [],

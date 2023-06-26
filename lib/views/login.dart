@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/components/buttons/button.dart';
 
+import '../services/api.dart';
 import '../utils/utilsmethod.dart';
 
 class LoginPage extends HookConsumerWidget {
@@ -249,9 +250,36 @@ class LoginPage extends HookConsumerWidget {
                       end: Alignment.topLeft,
                       begin: Alignment.topRight,
                     ),
-                    onTap: () {
+                    onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        context.go("/home");
+                        final data = await apiCall(
+                            query:
+                                "query signin(\$loginUserInput:LoginUserInput!){signin (loginUserInput:\$loginUserInput){ id, token, role, email}} ",
+                            variables: {
+                              "loginUserInput": {
+                                "email": emailController.text,
+                                "password": passwordController.text
+                              }
+                            },
+                            headers: {
+                              "content-type": "*/*"
+                            });
+
+                        if (data.status) {
+                          context.go("/home");
+                        } else {
+                          var snackBar = SnackBar(
+                            content: Text(
+                              data.message,
+                              textScaleFactor: 1,
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            backgroundColor: Colors.redAccent,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       }
                     },
                     icon: Icons.login,
