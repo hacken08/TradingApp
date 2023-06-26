@@ -76,7 +76,7 @@ class LoginPage extends HookConsumerWidget {
                           return null;
                         },
                         cursorColor: Colors.black,
-                        cursorWidth: 0.8,
+                        cursorWidth: 0.8, 
                         cursorHeight: 25,
                         style: const TextStyle(
                           color: Colors.black,
