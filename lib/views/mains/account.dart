@@ -34,7 +34,7 @@ class AccountPage extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
                             Padding(
-                              padding: EdgeInsets.only(),
+                              padding: EdgeInsets.only(top: 10),
                               child: CircleAvatar(
                                 radius: 40,
                                 backgroundImage:
@@ -71,13 +71,19 @@ class AccountPage extends HookConsumerWidget {
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
+                        
+                          borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(40),
+                          ),
                       ),
                       child: Column(children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Spacer(),
-                            Image.asset('assets/images/verfiy.png', scale: 7),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0, top: 20),
+                              child: Image.asset('assets/images/verfiy.png', scale: 7),
+                            ),
                             Spacer(),
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
@@ -102,11 +108,12 @@ class AccountPage extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Spacer(),
+                            SizedBox(width: 10,),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(right: 50, bottom: 30),
+                                  const EdgeInsets.only( bottom: 30, left: 14),
                               child: Text('1203 3200 3015 2500'),
-                            ),
+                            ), Spacer(),
                             Padding(
                               padding: const EdgeInsets.only(
                                 right: 50.0,
@@ -135,7 +142,12 @@ class AccountPage extends HookConsumerWidget {
                         child: Container(
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255)),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                              
+                              ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,

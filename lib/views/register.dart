@@ -35,30 +35,26 @@ class RegisterPage extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      onPressed: () {
-                        context.pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: 30,
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          size: 30,
+                        ),
                       ),
                     ),
                   ),
-
-                  Center(
-                    child: Image.asset(
-                      'assets/images/signUp.png',
-                      width: size.width * 0.7,
-                      height: size.width * 0.7,
-                    ),
-                  ),
+                  SizedBox(height: size.height * 0.09,),
 
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 25),
                     child: const Text(
                       "Sign Up",
                       style: TextStyle(
@@ -66,10 +62,10 @@ class RegisterPage extends HookConsumerWidget {
                           fontSize: 35,
                           fontFamily: 'abel'),
                     ),
-                  ),
+                  ), SizedBox(height: 5,),
 
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 25),
                     child: const Text(
                       "Create your Demant account",
                       style: TextStyle(
@@ -77,7 +73,7 @@ class RegisterPage extends HookConsumerWidget {
                           fontSize: 13,
                           fontFamily: 'abel'),
                     ),
-                  ),
+                  ),SizedBox(height: 20,),
                   Spacer(),
                   
                   // -------------username-----------------
@@ -103,12 +99,9 @@ class RegisterPage extends HookConsumerWidget {
                       controller: usernameController,
                       decoration: InputDecoration(
                         icon: SizedBox(
-                          width: 20,
+                          width: 40,
                           height: 20,
-                          child: Icon(
-                            Icons.person_outline,
-                            color: Colors.black,
-                          ),
+                          child: Image.asset('assets/icons/@.png', )
                         ),
                         filled: false,
                         border: UnderlineInputBorder(
@@ -148,6 +141,7 @@ class RegisterPage extends HookConsumerWidget {
                       ),
                     ),
                   ),
+                    SizedBox(height: 20),
 
                   // ------------------- Email ID -----------------------
                   Padding(
@@ -174,7 +168,7 @@ class RegisterPage extends HookConsumerWidget {
                       controller: emailController,
                       decoration: InputDecoration(
                         icon: SizedBox(
-                          width: 20,
+                          width: 40,
                           height: 20,
                           child: Icon(
                             Icons.mail_outline,
@@ -219,6 +213,7 @@ class RegisterPage extends HookConsumerWidget {
                       ),
                     ),
                   ),
+                    SizedBox(height: 20),
                   // ------------------- Password -----------------------
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -243,7 +238,7 @@ class RegisterPage extends HookConsumerWidget {
                       obscureText: showPass.value,
                       decoration: InputDecoration(
                         icon: SizedBox(
-                          width: 20,
+                          width: 40,
                           height: 20,
                           child: Icon(
                             Icons.lock_outline,
@@ -318,6 +313,7 @@ class RegisterPage extends HookConsumerWidget {
                       icon: Icons.login,
                     ),
                   ),
+                    SizedBox(height: 20),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -361,9 +357,7 @@ class RegisterPage extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  )
+                  SizedBox(height: 10,)
                 ],
               ),
             ),

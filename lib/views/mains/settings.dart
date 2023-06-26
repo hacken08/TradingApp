@@ -20,6 +20,8 @@ class SettingPage extends HookConsumerWidget {
               margin: EdgeInsets.symmetric(horizontal: 3, vertical: 15),
               shadowColor: Colors.black,
               elevation: 4,
+
+                  // --------------- Security Settings list ------------
               child: Container(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
@@ -28,8 +30,7 @@ class SettingPage extends HookConsumerWidget {
                       topRight: Radius.circular(20.3),
                     ),
                   ),
-
-                  // --------------- Security Settings list ------------
+                  
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -37,7 +38,9 @@ class SettingPage extends HookConsumerWidget {
                         padding: const EdgeInsets.only(left: 26),
                         child: Text("Security Settings",
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w500)),
+                                fontSize: 22, fontWeight: FontWeight.w500
+                                )
+                              ),
                       ),
 
                       // 1. Change PIN...........
@@ -92,7 +95,7 @@ class SettingPage extends HookConsumerWidget {
             ),
 
 
-            // ------------------- User Preference -----------------
+            // ----------------- User Preference -----------------
             Card(
               shadowColor: Colors.black,
               elevation: 4,

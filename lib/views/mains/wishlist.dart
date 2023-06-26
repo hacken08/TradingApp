@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +9,7 @@ class WishListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.of(context).size;
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -45,9 +46,9 @@ class WishListPage extends HookConsumerWidget {
         children: [
           // ---------- Stock Highlight --------
           Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+            padding: const EdgeInsets.only(left: 12.0,bottom: 20, right: 12.0),
             child: Container(
-              height: 100,
+              height: 120,
               width: 400,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 241, 241, 241),
@@ -56,9 +57,10 @@ class WishListPage extends HookConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+
                   // Nifty........
                   Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(30),
                     child: InkWell(
                       onTap: () {
                         print("Nifty");
@@ -106,7 +108,7 @@ class WishListPage extends HookConsumerWidget {
 
                   // BANKNIFTY.......
                   Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(30),
                     child: InkWell(
                       onTap: () {
                         print('BankNifty');
@@ -153,7 +155,7 @@ class WishListPage extends HookConsumerWidget {
 
           // -------------- StockList-------------
        SizedBox(
-        height: 418, 
+        height: size.height * 0.51, 
         child:   SingleChildScrollView(
           child: Column(
             children: [
@@ -204,8 +206,7 @@ class WishListPage extends HookConsumerWidget {
             ],
           ),
         )
-       )
-          
+       ),
         ],
       ),
     );
