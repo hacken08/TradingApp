@@ -242,7 +242,7 @@ class WishListPage extends HookConsumerWidget {
                       "mywishlist",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        letterSpacing: 0.6,
+                        letterSpacing: -0.2,
                         fontSize: 17,
                         color: Color.fromARGB(255, 56, 4, 213),
                       ),

@@ -1,18 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trading_app/routers/route_names.dart';
 import 'package:trading_app/states/mainstate.dart';
-import 'package:trading_app/views/Trades/buy.dart';
-import 'package:trading_app/views/mains/home.dart';
 import 'package:trading_app/views/mains/order/top_bar.dart';
-import 'package:trading_app/views/mains/protfolio.dart';
 import 'package:trading_app/views/mains/settings.dart';
-import 'package:trading_app/views/mains/watchlist.dart';
-import 'package:trading_app/views/profile/profile.dart';
-import 'package:trading_app/views/Trades/dummy_sell.dart';
-import 'package:trading_app/views/trades/trading.dart';
 import 'package:trading_app/views/chat/chat_page.dart';
 import 'package:trading_app/views/chat/contact_list.dart';
+import 'package:trading_app/views/mains/watchlist.dart';
 import 'package:trading_app/views/profile/editprofile.dart';
 import 'package:trading_app/views/chat/searchuser.dart';
 import 'package:trading_app/views/mains/wallet.dart';
@@ -74,6 +67,11 @@ final GoRouter router = GoRouter(
       path: "/stockdata",
       builder: (context, state) => const StockData(),
     ),
+    GoRoute(
+      name: RouteNames.watchlist,
+      path: "/watchlist",
+      builder: (context, state) => const WishListPage(),
+    ),
     // GoRoute(
     //   name: RouteNames.home,
     //   path: "/home",
@@ -87,18 +85,7 @@ final GoRouter router = GoRouter(
     //       path: "/home",
     //       builder: (context, state) => const HomePage(),
     //     ),
-    //     GoRoute(
-    //         name: RouteNames.watchlist,
-    //         path: "/watchlist",
-    //         builder: (context, state) => const WishListPage(),
-    //         routes: [
-    //           GoRoute(
-    //             name: RouteNames.stockdata,
-    //             path: "stockdata/:name",
-    //             builder: (context, state) =>
-    //                 StockData(name: state.pathParameters["name"]!),
-    //           ),
-    //         ]),
+    //
     //     GoRoute(
     //       name: RouteNames.trading,
     //       path: "/trades",

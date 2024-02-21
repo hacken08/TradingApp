@@ -99,7 +99,7 @@ class Positions extends HookConsumerWidget {
             ),
 
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 17.0, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,7 +131,7 @@ class Positions extends HookConsumerWidget {
                 height: 100,
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 17),
-                margin: const EdgeInsets.symmetric(horizontal: 9, vertical: 0),
+                margin: const EdgeInsets.symmetric(horizontal: 7, vertical: 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,

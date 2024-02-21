@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:logger/logger.dart';
@@ -6,6 +8,7 @@ import 'package:trading_app/utils/alerts.dart';
 import 'package:trading_app/views/Trades/buy.dart';
 import 'package:trading_app/views/Trades/sell.dart';
 import 'package:trading_app/views/Trades/stock%20detail/top_bar.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../utils/utilsmethod.dart';
 
@@ -17,17 +20,17 @@ Future<void> halfStockView(BuildContext context, name) async {
   // _________________ Stock info >>>>>>>>
 
   // ValueNotifier<bool> isHighLevel = useState<bool>(false);
-  // dynamic isLoading;
-  // dynamic logo;
-  // dynamic quote;
-  // dynamic profile;
-  // dynamic price;
-  final isLoading = useState<bool>(true);
-  // ValueNotifier<bool> isHighLevel = useState<bool>(false);
-  final logo = useState<String>("");
-  final quote = useState<dynamic>(null);
-  final profile = useState<dynamic>(null);
-  final price = useState<dynamic>(null);
+  dynamic isLoading;
+  dynamic logo;
+  dynamic quote;
+  dynamic profile;
+  dynamic price;
+  //  final isLoading = useState<bool>(true);
+  //   // ValueNotifier<bool> isHighLevel = useState<bool>(false);
+  //   final logo = useState<String>("");
+  //   final  quote = useState<dynamic>(null);
+  //   final  profile = useState<dynamic>(null);
+  //   final  price = useState<dynamic>(null);
 
   Future<void> getlogo() async {
     final url = genUrl("logo", {"symbol": name});
@@ -36,7 +39,7 @@ Future<void> halfStockView(BuildContext context, name) async {
       if (!context.mounted) return;
       return erroralert(context, "Error", data.message);
     }
-    logo.value = data.data["url"];
+    logo = data.data["url"];
     Logger().d(logo);
   }
 
@@ -47,7 +50,7 @@ Future<void> halfStockView(BuildContext context, name) async {
       if (!context.mounted) return;
       return erroralert(context, "Error", data.message);
     }
-    quote.value = data.data;
+    quote = data.data;
     // Logger().d(quote);
   }
 
@@ -58,7 +61,7 @@ Future<void> halfStockView(BuildContext context, name) async {
       if (!context.mounted) return;
       return erroralert(context, "Error", data.message);
     }
-    profile.value = data.data;
+    profile = data.data;
     // Logger().d(profile);
   }
 
@@ -69,17 +72,17 @@ Future<void> halfStockView(BuildContext context, name) async {
       if (!context.mounted) return;
       return erroralert(context, "Error", data.message);
     }
-    price.value = data.data;
+    price = data.data;
     // Logger().d(price);
   }
 
   Future<void> init() async {
-    isLoading.value = true;
+    isLoading = true;
     await getlogo();
     await getQuote();
     await getProfile();
     await getPrice();
-    isLoading.value = false;
+    isLoading = false;
   }
 
   await init();
@@ -89,9 +92,11 @@ Future<void> halfStockView(BuildContext context, name) async {
   // }, []);
 
   showModalBottomSheet(
+      // ignore: use_build_context_synchronously
       context: context,
       elevation: 3.5,
       shape: const RoundedRectangleBorder(
+        
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       backgroundColor: const Color.fromARGB(255, 244, 245, 250),
@@ -100,15 +105,15 @@ Future<void> halfStockView(BuildContext context, name) async {
         // --------------------- Main Page Container ---------------------
         return Container(
             padding:
-                const EdgeInsets.only(top: 15, left: 8, right: 8, bottom: 8),
-            height: size.height * 0.82,
+                const EdgeInsets.only(top: 10, left: 10, right: 8, bottom: 0),
+            // height: size.height * 0.82,
             width: double.maxFinite,
             color: const Color.fromARGB(255, 244, 245, 250),
             // decoration: const BoxDecoration(
             //   color: Color.fromARGB(245, 244, 245, 250),
             // ),
             child: SingleChildScrollView(
-              child: isLoading.value
+              child: isLoading
                   ? SizedBox(
                       width: size.width,
                       child: const Center(
@@ -124,7 +129,7 @@ Future<void> halfStockView(BuildContext context, name) async {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                profile.value['symbol'],
+                                profile['symbol'],
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 0, 0, 0),
                                     fontWeight: FontWeight.w600,
@@ -142,7 +147,7 @@ Future<void> halfStockView(BuildContext context, name) async {
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
-                                  profile.value['exchange'],
+                                  profile['exchange'],
                                   style: const TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w500,
@@ -152,13 +157,13 @@ Future<void> halfStockView(BuildContext context, name) async {
                               )
                             ],
                           ),
-                          subtitle: Text(quote.value['datetime']),
+                          subtitle: Text(quote['datetime']),
                           trailing: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                '₹ ${trim(price.value['price'])}',
+                                trim(price['price']),
                                 style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w600,
@@ -167,7 +172,7 @@ Future<void> halfStockView(BuildContext context, name) async {
                               // SizedBox(
                               //   height: 5,
                               // ),
-                              Text("+ ${quote.value['percent_change']}",
+                              Text("+ ${quote['percent_change']}",
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 15,
@@ -203,25 +208,25 @@ Future<void> halfStockView(BuildContext context, name) async {
                               //  ..... Today price update .....
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceStatus(
                                       status: 'open',
-                                      value: trim(quote.value['open']),
+                                      value: trim(quote['open']),
                                     ),
                                     PriceStatus(
                                       status: 'high',
-                                      value: trim(quote.value['high']),
+                                      value: trim(quote['high']),
                                     ),
                                     PriceStatus(
                                         status: 'low',
-                                        value: trim(quote.value['low'])),
+                                        value: trim(quote['low'])),
                                     PriceStatus(
                                         status: 'close',
-                                        value: trim(quote.value['close'])),
+                                        value: trim(quote['close'])),
                                   ],
                                 ),
                               ),
@@ -481,7 +486,10 @@ Future<void> halfStockView(BuildContext context, name) async {
                                   onTap: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => StockDetail(
-                                          profile: profile, queto: quote),
+                                        profile: profile,
+                                        queto: quote,
+                                        price: price,
+                                      ),
                                     ),
                                   ),
                                   child: Row(

@@ -685,7 +685,7 @@ class StockData extends HookConsumerWidget {
             Icons.arrow_back,
             color: blackColor,
           ),
-          onPressed: () => {context.pop()},
+          onPressed: () => context.pop(),
         ),
         title: Text(
           'name',

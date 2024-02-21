@@ -1,10 +1,13 @@
 // ignore_for_file: camel_case_types, avoid_print, use_build_context_synchronously
 
+import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trading_app/services/api.dart';
 import 'package:trading_app/utils/alerts.dart';
@@ -56,203 +59,187 @@ class TrendingStock extends HookConsumerWidget {
       // Logger().d("result: ${searchedStock.value}");
     }
 
-    return ValueListenableBuilder(
-        valueListenable: searchQueryNotifier,
-        builder: (context, searchQuery, child) {
-          return Scaffold(
-              body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    InkWell(
-                      hoverColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: 58,
-                        child: TextFormField(
-                          onChanged: (value) {
-                            filterStock(value);
-                          },
-                          decoration: InputDecoration(
-                            hintText: "Search for company or stock",
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Image.asset(
-                                'assets/icons/search.png',
-                                color: const Color.fromARGB(255, 97, 93, 93),
-                                scale: 2.7,
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+        body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              InkWell(
+                hoverColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () => {},
+                child: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+          // ______________ Search and back button ______________
+
+          const SizedBox(
+            height: 15,
+          ),
+          SizedBox(
+            height: 58,
+            child: TextFormField(
+              onChanged: (value) {
+                filterStock(value);
+              },
+              decoration: InputDecoration(
+                hintText: "Search for company or stock",
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Image.asset(
+                    'assets/icons/search.png',
+                    color: const Color.fromARGB(255, 97, 93, 93),
+                    scale: 2.7,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(
+                        width: 0.5, color: Color.fromARGB(52, 0, 0, 0))),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(width: 1, color: Colors.grey)),
+              ),
+            ),
+          ),
+
+          // _________________ Treding Stocks _________________
+          // (searchQuery.isEmpty)
+          //     ? const TredingPage()
+          //     : (searchQuery != 'nifty')
+          //         ? const NothingFound()
+          //         : const searchedContent()
+          // searchedStock.value.isNotEmpty
+          //     ? const TredingPage()
+          //     :
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+                itemCount: searchedStock.value.length,
+                itemBuilder: (context, index) {
+                  String name = searchedStock.value[index]["name"];
+                  List<String> words = name.split(' ');
+                  name = words.take(2).join(' ');
+
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                        ),
+                        child: ListTile(
+                          hoverColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          onTap: () => halfStockView(context,
+                              searchedStock.value[index]["symbol"]),
+                          // onTap: () =>  context.go(
+                          //     "watchlist/stockData/${stockData.value[index]["symbol"]}"),
+                          contentPadding:
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
+                          leading: const Padding(
+                            padding: EdgeInsets.only(right: 5.0),
+                            child: CircleAvatar(
+                              backgroundColor:
+                                  Color.fromARGB(255, 233, 236, 253),
+                              child: Text(
+                                'EQ',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 112, 46, 255),
+                                  // fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromARGB(52, 0, 0, 0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.grey)),
+                          ),
+                          title: Row(
+                            children: [
+                              SizedBox(
+                                width: 241,
+                                child: Text(
+                                  searchedStock.value[index]["name"],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16.6,
+                                      fontFamily: 'Roboto'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                searchedStock.value[index]["symbol"] ?? ' ',
+                                overflow: TextOverflow.fade,
+                                // 'lkdsjf',
+                                style: const TextStyle(
+                                    fontSize: 15.5, color: Colors.black87),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 5, left: 6),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 1),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(190, 238, 234, 234),
+                                  borderRadius: BorderRadius.circular(
+                                      4), // Optional: Add border radius
+                                ),
+                                child: Text(
+                                  searchedStock.value[index]["exchange"] ?? ' ',
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 51, 51, 51),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: InkWell(
+                            focusColor: Colors.white,
+                            splashColor: Colors.white,
+                            hoverColor: Colors.white,
+                            onTap: () {},
+                            child: Image.asset(
+                              'assets/icons/star_add.png',
+                              scale: 1.8,
+                              color: const Color.fromARGB(140, 0, 0, 0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                // ______________ Search and back button ______________
-
-                const SizedBox(
-                  height: 15,
-                ),
-
-                // _________________ Treding Stocks _________________
-                // (searchQuery.isEmpty)
-                //     ? const TredingPage()
-                //     : (searchQuery != 'nifty')
-                //         ? const NothingFound()
-                //         : const searchedContent()
-                // searchedStock.value.isNotEmpty
-                //     ? const TredingPage()
-                //     :
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: searchedStock.value.length,
-                      itemBuilder: (context, index) {
-                        String name = searchedStock.value[index]["name"];
-                        List<String> words = name.split(' ');
-                        name = words.take(2).join(' ');
-
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 6,
-                              ),
-                              child: ListTile(
-                                hoverColor: Colors.transparent,
-                                splashColor: Colors.transparent,
-                                onTap: () => halfStockView(
-                                    context,
-                                    searchedStock.value[index]["symbol"] ??
-                                        ' '),
-                                // onTap: () =>  context.go(
-                                //     "watchlist/stockData/${stockData.value[index]["symbol"]}"),
-                                contentPadding: const EdgeInsets.only(
-                                    left: 0.0, right: 10.0),
-                                leading: const Padding(
-                                  padding: EdgeInsets.only(right: 5.0),
-                                  child: CircleAvatar(
-                                    backgroundColor:
-                                        Color.fromARGB(255, 233, 236, 253),
-                                    child: Text(
-                                      'EQ',
-                                      style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 112, 46, 255),
-                                        // fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                title: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 241,
-                                      child: Text(
-                                        searchedStock.value[index]["name"],
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                            color: Color.fromARGB(255, 0, 0, 0),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16.6,
-                                            fontFamily: 'Roboto'),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                subtitle: Row(
-                                  children: [
-                                    Text(
-                                      searchedStock.value[index]["symbol"] ??
-                                          ' ',
-                                      overflow: TextOverflow.fade,
-                                      // 'lkdsjf',
-                                      style: const TextStyle(
-                                          fontSize: 15.5,
-                                          color: Colors.black87),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 5, left: 6),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 1),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            190, 238, 234, 234),
-                                        borderRadius: BorderRadius.circular(
-                                            4), // Optional: Add border radius
-                                      ),
-                                      child: Text(
-                                        searchedStock.value[index]
-                                                ["exchange"] ??
-                                            ' ',
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                trailing: InkWell(
-                                  focusColor: Colors.white,
-                                  splashColor: Colors.white,
-                                  hoverColor: Colors.white,
-                                  onTap: () {},
-                                  child: Image.asset(
-                                    'assets/icons/star_add.png',
-                                    scale: 1.8,
-                                    color: const Color.fromARGB(140, 0, 0, 0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Divider(
-                              thickness: 0.5,
-                              height: 5,
-                              color: Color.fromARGB(52, 0, 0, 0),
-                            ),
-                          ],
-                        );
-                      }),
-                ),
-                const Divider(
-                  thickness: 0.5,
-                  height: 5,
-                  color: Color.fromARGB(52, 0, 0, 0),
-                ),
-              ],
-            ),
-          ));
-        });
+                      const Divider(
+                        thickness: 0.5,
+                        height: 5,
+                        color: Color.fromARGB(52, 0, 0, 0),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+          const Divider(
+            thickness: 0.5,
+            height: 5,
+            color: Color.fromARGB(52, 0, 0, 0),
+          ),
+        ],
+      ),
+    ));
   }
 }
 

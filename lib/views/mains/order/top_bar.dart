@@ -26,12 +26,7 @@ class OrderPage extends HookConsumerWidget {
           // backgroundColor: Color.fromARGB(255, 245,246,251),
           elevation: 0,
           scrolledUnderElevation: 0,
-          leading: InkWell(
-            onTap: () {
-              context.push("/home");
-            },
-            child: const Icon(Icons.arrow_back),
-          ),
+         
           title: const Padding(
             padding: EdgeInsets.only(top: 35.0, left: 7),
             child: Text(

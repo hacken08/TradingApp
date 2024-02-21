@@ -5,20 +5,29 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:trading_app/utils/const.dart';
 import 'package:trading_app/views/Trades/stock%20detail/derivative.dart';
 import 'package:trading_app/views/Trades/stock%20detail/fundamental.dart';
 import 'package:trading_app/views/Trades/stock%20detail/overview.dart';
 import 'package:trading_app/views/Trades/stock%20detail/technical.dart';
+import 'package:trading_app/views/Trades/stock_view.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class StockDetail extends HookConsumerWidget {
   final profile;
   final queto;
-  const StockDetail({super.key, required this.profile, required this.queto});
+
+  final price;
+  const StockDetail(
+      {super.key,
+      required this.price,
+      required this.profile,
+      required this.queto});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // _____________ WebSocket ____________
     ValueNotifier<Map<String, dynamic>> wsResponse =
         useState<Map<String, dynamic>>({});
 
@@ -27,11 +36,14 @@ class StockDetail extends HookConsumerWidget {
       channel.stream.listen((message) {
         final Map<String, dynamic> response = json.decode(message);
         wsResponse.value = response;
+        Logger().d(wsResponse.value);
       }, onError: (error) {});
 
       return null;
     }, []);
 
+
+    
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -146,7 +158,7 @@ class StockDetail extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
-                      wsResponse.value['exchange'] ?? ' ',
+                      wsResponse.value['exchange'] ?? queto['exchange'],
                       style: const TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -163,7 +175,10 @@ class StockDetail extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(wsResponse.value['price'] ?? '',
+                  Text(
+                      wsResponse.value['event'] != 'subscribe-status'
+                          ? '${wsResponse.value['price']}'
+                          : trim(price['price']),
                       style: const TextStyle(
                           letterSpacing: 1,
                           fontSize: 15,
